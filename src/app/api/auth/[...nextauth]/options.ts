@@ -14,11 +14,7 @@ export const authOptions: NextAuthOptions = {
       id: "credentials",
       name: "Credentials",
       credentials: {
-        email: {
-          label: "Email",
-          type: "text",
-          placeholder: "jsmith@gmail.com",
-        },
+        email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials: any): Promise<any> {
@@ -27,8 +23,9 @@ export const authOptions: NextAuthOptions = {
 
         try {
           // Check if the user exists in our database
+
+          // In sign-in page we'll have 2 fields, "Email/username" and "Password". In "Email/username" field, user can enter either of these. So we need customized query.
           const user = await UserModel.findOne({
-            // In sign-in page we'll have 2 fields, "Email/username" and "Password". In "Email/username" field, user can enter either of these. So we need customized query.
             $or: [
               { email: credentials.identifier },
               { username: credentials.identifier },
@@ -42,16 +39,16 @@ export const authOptions: NextAuthOptions = {
 
           // If the user exists but he haven't verified yet.
           if (!user.isVerified) {
-            throw new Error("Please verify your account before login!");
+            throw new Error("Please verify your account before logging in!");
           }
 
           // Now compare the password received from user(While Sigin) with the password stored in our database corresponding to that user
-          const isPassword = await bcrypt.compare(
-            credentials.passowrd,
+          const isPasswordCorrect = await bcrypt.compare(
+            credentials.password,
             user.password
           );
 
-          if (isPassword) {
+          if (isPasswordCorrect) {
             return user;
           } else {
             throw new Error("Incorrect Password!");
@@ -63,8 +60,8 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
+    // Token by default holds the id of the user, if we need to add more info into the token, we can do that
     async jwt({ token, user }) {
-      // Token by default holds the id of the user, if we need to add more info into the token, we can do that
       if (user) {
         token._id = user._id?.toString();
         token.isVerified = user.isVerified;
@@ -74,10 +71,10 @@ export const authOptions: NextAuthOptions = {
 
       return token;
     },
+    // Session by default holds the id of the user, if we need to add more info into the session, we can do that
     async session({ session, token }) {
-      // Session by default holds the id of the user, if we need to add more info into the session, we can do that
       if (token) {
-        session.user._id = token._id?.toString();
+        session.user._id = token._id;
         session.user.isVerified = token.isVerified;
         session.user.isAcceptingMessages = token.isAcceptingMessages;
         session.user.username = token.username;
