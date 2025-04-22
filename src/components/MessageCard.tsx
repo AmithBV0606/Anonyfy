@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -20,58 +13,78 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "./ui/button";
+import dayjs from "dayjs";
 import { X } from "lucide-react";
 import { Message } from "@/model/User";
 import { toast } from "sonner";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { ApiResponse } from "@/types/ApiResponse";
 
 type MessageCardProps = {
-    message: Message;
-    onMessageDelete: (messageId: string) => void;
-}
+  key: string;
+  message: Message;
+  onMessageDelete: (messageId: string) => void;
+};
 
-export default function MessageCard({ message, onMessageDelete }: MessageCardProps) {
+export default function MessageCard({
+  key,
+  message,
+  onMessageDelete,
+}: MessageCardProps) {
   const handleDeleteConfirm = async () => {
-    const response = await axios.delete<ApiResponse>(`/api/delete-message/${message._id}`)
-    toast(response.data.message);
-    onMessageDelete(message._id);
+    try {
+      const response = await axios.delete<ApiResponse>(
+        `/api/delete-message/${message._id}`
+      );
+      toast(response.data.message);
+      // @ts-ignore
+      onMessageDelete(message._id);
+    } catch (error) {
+      const axiosError = error as AxiosError<ApiResponse>;
+      toast(axiosError.response?.data.message ?? "Failed to delete message");
+    }
   };
 
   return (
-    <Card>
+    <Card key={key}>
       <CardHeader>
-        <CardTitle>Card Title</CardTitle>
+        <div className="flex justify-between items-center">
+          <CardTitle>{message.content}</CardTitle>
 
-        <AlertDialog>
-          <AlertDialogTrigger asChild>
-            <Button variant="destructive">
-              <X className="w-5 h-5" />
-            </Button>
-          </AlertDialogTrigger>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-              <AlertDialogDescription>
-                This action cannot be undone. This will permanently delete the
-                question and remove the data from our servers.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={handleDeleteConfirm}>
-                Delete
-              </AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button variant="destructive">
+                <X className="w-5 h-5" />
+              </Button>
+            </AlertDialogTrigger>
+
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+
+                <AlertDialogDescription>
+                  This action cannot be undone. This will permanently delete the
+                  question and remove the data from our servers.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+
+                <AlertDialogAction onClick={handleDeleteConfirm}>
+                  Delete
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        </div>
+
+        <div className="text-sm">
+          {dayjs(message.createdAt).format("MMM D, YYYY h:mm A")}
+        </div>
       </CardHeader>
-      <CardContent>
-        <p>Card Content</p>
-      </CardContent>
-      <CardFooter>
-        <p>Card Footer</p>
-      </CardFooter>
+
+      <CardContent></CardContent>
     </Card>
   );
 }
