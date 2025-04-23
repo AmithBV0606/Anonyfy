@@ -56,7 +56,7 @@ export default function page() {
   // ______________________________________________________________________________________
 
   // This functions calls an API to get the "isAcceptingMessages" status.
-  const fetchAcceptMessgae = useCallback(async () => {
+  const fetchAcceptMessages = useCallback(async () => {
     setIsSwitchLoading(true);
 
     try {
@@ -82,7 +82,7 @@ export default function page() {
       setIsSwitchLoading(false);
 
       try {
-        const response = await axios.get<ApiResponse>("/api/get-messgaes");
+        const response = await axios.get<ApiResponse>("/api/get-messages");
         setMessages(response.data.messages || []);
 
         if (refresh) {
@@ -127,7 +127,7 @@ export default function page() {
   useEffect(() => {
     if (!session || !session.user) return;
     fetchMessages();
-    fetchAcceptMessgae();
+    fetchAcceptMessages();
 
     // Generate profile URL on client
     const username = session?.user?.username;
@@ -135,7 +135,7 @@ export default function page() {
       const baseUrl = `${window.location.protocol}//${window.location.host}`;
       setProfileUrl(`${baseUrl}/u/${username}`);
     }
-  }, [session, setValue, fetchAcceptMessgae, fetchMessages]);
+  }, [session, setValue, fetchAcceptMessages, fetchMessages]);
 
   // ______________________________________________________________________________________
 
@@ -172,7 +172,13 @@ export default function page() {
             disabled
             className="input input-bordered w-full p-2 mr-2"
           />
-          <Button onClick={copyToClipboard}>Copy</Button>
+          <Button
+            onClick={copyToClipboard}
+            variant={"outline"}
+            className="text-black"
+          >
+            Copy
+          </Button>
         </div>
       </div>
 
