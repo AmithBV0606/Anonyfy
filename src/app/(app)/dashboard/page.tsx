@@ -10,7 +10,6 @@ import { ApiResponse } from "@/types/ApiResponse";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios, { AxiosError } from "axios";
 import { Loader2, RefreshCcw } from "lucide-react";
-import { User } from "next-auth";
 import { useSession } from "next-auth/react";
 import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -25,6 +24,9 @@ export default function page() {
 
   // Loading state for toggling switch
   const [isSwitchLoading, setIsSwitchLoading] = useState(false);
+
+  // Profile URL on Client side
+  const [profileUrl, setProfileUrl] = useState("");
 
   // ______________________________________________________________________________________
 
@@ -121,24 +123,29 @@ export default function page() {
 
   // ______________________________________________________________________________________
 
-  // Copy to clip-board
-  // const { username } = session?.user as User;
-  const baseUrl = `${window.location.protocol}//${window.location.host}`;
-  const profileUrl = `${baseUrl}/u/${session?.user.username}`;
-
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(profileUrl);
-    toast("Profile URL has been copied to clipboard!!");
-  };
-
-  // ______________________________________________________________________________________
-
   // To call all the functions which will fetch messages and their "isAcceptingMessages" status
   useEffect(() => {
     if (!session || !session.user) return;
     fetchMessages();
     fetchAcceptMessgae();
+
+    // Generate profile URL on client
+    const username = session?.user?.username;
+    if (username) {
+      const baseUrl = `${window.location.protocol}//${window.location.host}`;
+      setProfileUrl(`${baseUrl}/u/${username}`);
+    }
   }, [session, setValue, fetchAcceptMessgae, fetchMessages]);
+
+  // ______________________________________________________________________________________
+
+  // Copy to clip-board
+  const copyToClipboard = () => {
+    if (profileUrl) {
+      navigator.clipboard.writeText(profileUrl);
+      toast("Profile URL has been copied to clipboard!!");
+    }
+  };
 
   // ______________________________________________________________________________________
 
@@ -155,7 +162,10 @@ export default function page() {
       <h1 className="text-4xl font-bold mb-4">Dashboard</h1>
 
       <div className="mb-4">
-        <h2 className="text-lg font-semibold mb-2">Copy Your Unique Profile Link</h2>{" "}
+        <h2 className="text-lg font-semibold mb-2">
+          Copy Your Unique Profile Link
+        </h2>{" "}
+        
         <div className="flex items-center">
           <input
             type="text"
@@ -180,6 +190,7 @@ export default function page() {
       </div>
       <Separator />
 
+      {/* Refresh button : */}
       <Button
         className="mt-4"
         variant="outline"
@@ -194,6 +205,8 @@ export default function page() {
           <RefreshCcw className="h-4 w-4" />
         )}
       </Button>
+
+      {/* Messages to display on Cards : */}
       <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
         {messages.length > 0 ? (
           messages.map((message, index) => (
