@@ -61,7 +61,7 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="text-center p-4 md:p-6 bg-gray-900 text-white">
+      <footer className="text-center p-4 md:p-6 bg-[#0D0C1D] text-white">
         © 2025 Anonyfy. All rights reserved.
       </footer>
     </>

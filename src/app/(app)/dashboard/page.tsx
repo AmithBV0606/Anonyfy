@@ -158,14 +158,13 @@ export default function page() {
   }
 
   return (
-    <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-white rounded w-full max-w-6xl">
+    <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-[#0D0C1D] text-white rounded-md lg:w-full lg:max-w-6xl">
       <h1 className="text-4xl font-bold mb-4">Dashboard</h1>
 
       <div className="mb-4">
         <h2 className="text-lg font-semibold mb-2">
           Copy Your Unique Profile Link
         </h2>{" "}
-        
         <div className="flex items-center">
           <input
             type="text"
@@ -177,13 +176,16 @@ export default function page() {
         </div>
       </div>
 
-      <div className="mb-4">
-        <Switch
-          {...register("acceptMessages")}
-          checked={acceptMessages}
-          onCheckedChange={handleSwitchChange}
-          disabled={isSwitchLoading}
-        />
+      <div className="mb-4 flex items-center justify-start">
+        <span className="bg-gray-100 rounded-md pt-1 px-1">
+          <Switch
+            {...register("acceptMessages")}
+            checked={acceptMessages}
+            onCheckedChange={handleSwitchChange}
+            disabled={isSwitchLoading}
+          />
+        </span>
+
         <span className="ml-2">
           Accept Messages: {acceptMessages ? "On" : "Off"}
         </span>
@@ -202,7 +204,7 @@ export default function page() {
         {isLoading ? (
           <Loader2 className="h-4 w-4 animate-spin" />
         ) : (
-          <RefreshCcw className="h-4 w-4" />
+          <RefreshCcw className="h-4 w-4 text-black" />
         )}
       </Button>
 
