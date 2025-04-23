@@ -1,10 +1,10 @@
 import { getServerSession, User } from "next-auth";
 import type { NextRequest } from "next/server";
-import { authOptions } from "../auth/[...nextauth]/options";
+import { authOptions } from "../../auth/[...nextauth]/options";
 import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/model/User";
 
-export default async function DELETE(
+export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ messageId: string }> }
 ) {
