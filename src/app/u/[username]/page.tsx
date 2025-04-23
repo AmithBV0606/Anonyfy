@@ -35,6 +35,9 @@ function page() {
     },
   });
 
+  // To disable the "send" button when the user haven't entered the content yet.
+  const messageContent = form.watch("content");
+
   // Function to call API which will save the message in the database
   const onSubmit = async (data: z.infer<typeof messageSchema>) => {
     setIsLoading(true);
@@ -48,6 +51,7 @@ function page() {
 
       if (response) {
         setIsLoading(false);
+        form.reset();
         toast(response.data.message);
       }
     } catch (error) {
@@ -102,7 +106,7 @@ function page() {
                 Please wait
               </Button>
             ) : (
-              <Button type="submit" disabled={isLoading}>
+              <Button type="submit" disabled={isLoading || !messageContent}>
                 Send It
               </Button>
             )}
