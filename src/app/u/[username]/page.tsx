@@ -23,6 +23,8 @@ import { toast } from "sonner";
 import * as z from "zod";
 import AllMessages from "@/All-Messages.json";
 import { QuestionProps } from "@/types/Questions";
+import { Separator } from "@/components/ui/separator";
+import Link from "next/link";
 
 function page() {
   const { username } = useParams<{ username: string }>();
@@ -59,6 +61,11 @@ function page() {
 
   // To disable the "send" button when the user haven't entered the content yet.
   const messageContent = form.watch("content");
+
+  // To set the text in the Textarea whenever the suggested question is clicked
+  const handleMessageClick = (suggestedQuestion: string) => {
+    form.setValue("content", suggestedQuestion);
+  };
 
   // Function to call API which will save the message in the database
   const onSubmit = async (data: z.infer<typeof messageSchema>) => {
@@ -149,7 +156,11 @@ function page() {
                 Please wait
               </Button>
             ) : (
-              <Button type="submit" disabled={isLoading || !messageContent} className="cursor-pointer">
+              <Button
+                type="submit"
+                disabled={isLoading || !messageContent}
+                className="cursor-pointer"
+              >
                 Send It
               </Button>
             )}
@@ -182,12 +193,26 @@ function page() {
 
         <CardContent className="flex flex-col space-y-4">
           {suggestedQuestions.map((suggestedQuestion, index) => (
-            <Button key={index} variant="outline" className="mb-2 font-semibold cursor-pointer">
+            <Button
+              key={index}
+              variant="outline"
+              className="mb-2 font-semibold cursor-pointer"
+              onClick={() => handleMessageClick(suggestedQuestion.question)}
+            >
               {suggestedQuestion.question}
             </Button>
           ))}
         </CardContent>
       </Card>
+
+      <Separator className="my-6" />
+
+      <div className="text-center">
+        <div className="mb-4">Get Your Message Board</div>
+        <Link href={"/sign-up"}>
+          <Button className="cursor-pointer">Create Your Account</Button>
+        </Link>
+      </div>
     </div>
   );
 }
