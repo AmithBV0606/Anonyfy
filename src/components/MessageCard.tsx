@@ -21,13 +21,11 @@ import axios, { AxiosError } from "axios";
 import { ApiResponse } from "@/types/ApiResponse";
 
 type MessageCardProps = {
-  key: string;
   message: Message;
   onMessageDelete: (messageId: string) => void;
 };
 
 export default function MessageCard({
-  key,
   message,
   onMessageDelete,
 }: MessageCardProps) {
@@ -46,7 +44,7 @@ export default function MessageCard({
   };
 
   return (
-    <Card key={key}>
+    <Card>
       <CardHeader>
         <div className="flex justify-between items-center">
           <CardTitle>{message.content}</CardTitle>
