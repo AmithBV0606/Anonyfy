@@ -28,7 +28,7 @@ export async function POST(request: Request) {
         {
           success: false,
           message:
-            "Currently the user, you're trying to send message is not accepting the messages!!",
+            "The creator to whom you're trying to send anonymous message is not accepting the messages!!",
         },
         { status: 403 }
       );
