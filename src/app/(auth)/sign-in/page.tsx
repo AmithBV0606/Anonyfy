@@ -54,7 +54,7 @@ function page() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-black inset-0 shadow-2xl shadow-amber-200">
+    <div className="flex justify-center items-center min-h-screen bg-[#0D0C1D] inset-0 shadow-2xl shadow-amber-200">
       <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
         <div className="text-center">
           <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
