@@ -27,13 +27,13 @@ export default function HeroSection() {
 
           <div className="flex flex-col sm:flex-row gap-4">
             <Link href={"/sign-up"}>
-              <Button className="bg-gray-100 text-gray-900 hover:bg-gray-400 px-8 py-6 text-lg">
+              <Button className="bg-gray-100 text-gray-900 hover:bg-gray-400 px-8 py-6 text-lg w-full">
                 Get Started
               </Button>
             </Link>
 
             <Link href="#how-it-works">
-              <Button className="border border-gray-500 bg-black text-gray-400 hover:bg-gray-800 px-20 py-6 text-lg">
+              <Button className="border border-gray-500 bg-black text-gray-400 hover:bg-gray-800 px-20 py-6 text-lg w-full">
                 Learn More <ChevronRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
