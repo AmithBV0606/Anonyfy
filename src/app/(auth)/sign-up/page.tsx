@@ -22,7 +22,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
+import { Loader2, Shield } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
 
 function page() {
   const [username, setUsername] = useState("");
@@ -91,114 +92,147 @@ function page() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-[#0D0C1D] inset-0 shadow-2xl shadow-amber-200">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
-        <div className="text-center">
-          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
-            Join Anonyfy
-          </h1>
-          <p className="mb-4">Sign up to start your anonymous adventure</p>
-        </div>
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-gray-100 flex flex-col">
+      {/* Header/Navbar */}
+      <div className="flex items-center justify-between p-6">
+        <Link href="/" className="flex items-center gap-2">
+          <Shield className="h-6 w-6 text-gray-100" />
 
-        {/* Form */}
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            {/* Username field : */}
-            <FormField
-              control={form.control}
-              name="username"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Username</FormLabel>
+          <span className="text-xl font-bold">Anonyfy</span>
+        </Link>
+      </div>
 
-                  <FormControl>
-                    <Input
-                      placeholder="JhonDoe"
-                      {...field}
-                      onChange={(e) => {
-                        field.onChange(e);
-                        debounced(e.target.value);
-                      }}
-                    />
-                  </FormControl>
+      <Separator className="bg-gray-800" />
 
-                  {isCheckingUsername && <Loader2 className="animate-spin" />}
+      {/* Form component : */}
+      <div className="flex-1 flex items-center justify-center px-4 py-12">
+        <div className="w-full max-w-md">
+          <div className="bg-gradient-to-br from-gray-800 to-gray-900 p-8 rounded-xl border border-gray-700 shadow-xl">
+            <div className="text-center mb-8">
+              <h1 className="text-2xl font-bold">
+                Create Your Anonyfy Account
+              </h1>
+              <p className="text-gray-400 mt-2">
+                Start receiving anonymous messages from your audience
+              </p>
+            </div>
 
-                  <p
-                    className={`text-sm ${usernameMessage === "This username is available!" ? "text-green-600" : "text-red-600"}`}
-                  >
-                    {usernameMessage}
-                  </p>
+            {/* Form */}
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-6"
+              >
+                {/* Username field : */}
+                <FormField
+                  control={form.control}
+                  name="username"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="mb-2">Username</FormLabel>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                      <FormControl>
+                        <Input
+                          placeholder="JhonDoe"
+                          {...field}
+                          onChange={(e) => {
+                            field.onChange(e);
+                            debounced(e.target.value);
+                          }}
+                        />
+                      </FormControl>
 
-            {/* Email field : */}
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
+                      {isCheckingUsername && (
+                        <Loader2 className="animate-spin" />
+                      )}
 
-                  <FormControl>
-                    <Input
-                      type="email"
-                      placeholder="jhondoe@gmail.com"
-                      {...field}
-                    />
-                  </FormControl>
+                      <p
+                        className={`text-sm ${usernameMessage === "This username is available!" ? "text-green-600" : "text-red-600"}`}
+                      >
+                        {usernameMessage}
+                      </p>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-            {/* Password field : */}
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
+                {/* Email field : */}
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="mb-2">Email</FormLabel>
 
-                  <FormControl>
-                    <Input type="password" placeholder="password" {...field} />
-                  </FormControl>
+                      <FormControl>
+                        <Input
+                          type="email"
+                          placeholder="jhondoe@gmail.com"
+                          {...field}
+                        />
+                      </FormControl>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-            <Button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Please wait
-                </>
-              ) : (
-                "Sign Up"
-              )}
-            </Button>
-          </form>
-        </Form>
+                {/* Password field : */}
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="mb-2">Password</FormLabel>
 
-        {/* Already a member? */}
-        <div className="text-center mt-4">
-          <p className="space-x-2">
-            <span>Already a member?</span>
-            <Link
-              href={"/sign-in"}
-              className="text-blue-600 hover:text-blue-800 underline"
-            >
-              Sign In
-            </Link>
-          </p>
+                      <FormControl>
+                        <Input
+                          type="password"
+                          placeholder="password"
+                          {...field}
+                        />
+                      </FormControl>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full mt-2 cursor-pointer py-4"
+                  variant={"secondary"}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Please wait
+                    </>
+                  ) : (
+                    "Sign Up"
+                  )}
+                </Button>
+              </form>
+            </Form>
+
+            {/* Already a member? */}
+            <div className="text-center mt-6">
+              <p className="text-gray-400">
+                Already have an account?{" "}
+                <Link href="/sign-in" className="text-gray-100 hover:underline">
+                  Sign in
+                </Link>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
+
+      <footer className="py-6 text-center text-gray-500 text-sm">
+        <p>© {new Date().getFullYear()} Anonyfy. All rights reserved.</p>
+      </footer>
     </div>
   );
 }

@@ -136,6 +136,7 @@ function page() {
 
                 <Button
                   type="submit"
+                  disabled={isSubmitting}
                   className="w-full mt-2 cursor-pointer py-4"
                   variant={"secondary"}
                 >
