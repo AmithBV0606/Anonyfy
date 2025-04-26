@@ -40,26 +40,34 @@ function page() {
     // console.log(data);
     setIsSubmitting(true);
 
-    const result = await signIn("credentials", {
-      redirect: false,
-      identifier: data.identifier,
-      password: data.password,
-    });
-    // console.log(result);
+    try {
+      const result = await signIn("credentials", {
+        redirect: false,
+        identifier: data.identifier,
+        password: data.password,
+      });
+      // console.log(result);
 
-    if (result?.error) {
-      if (result.error === "CredentialsSignin") {
-        setIsSubmitting(false);
-        toast("Incorrect username or password");
-      } else {
-        setIsSubmitting(false);
-        toast(result.error);
+      if (result?.error) {
+        if (result.error === "CredentialsSignin") {
+          setIsSubmitting(false);
+          toast("Incorrect username or password");
+        } else {
+          setIsSubmitting(false);
+          toast(result.error);
+        }
       }
-    }
 
-    if (result?.url) {
-      router.replace("/dashboard");
-      setIsSubmitting(false);
+      if (result?.url) {
+        router.replace("/dashboard");
+        setIsSubmitting(false);
+      }
+    } catch (error) {
+      console.error("Error in signup of user", error);
+      if (error instanceof Error) {
+        toast(error?.message);
+        setIsSubmitting(false);
+      }
     }
   };
 
