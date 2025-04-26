@@ -15,7 +15,7 @@ import { messageSchema } from "@/schemas/messageSchema";
 import { ApiResponse } from "@/types/ApiResponse";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios, { AxiosError } from "axios";
-import { Loader2 } from "lucide-react";
+import { Loader2, Shield } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -116,103 +116,134 @@ function page() {
   };
 
   return (
-    <div className="container mx-auto my-8 p-6 bg-white rounded max-w-4xl">
-      <h1 className="text-2xl md:text-4xl font-extrabold mb-12 text-center">
+    // "container mx-auto my-8 p-6 bg-white rounded max-w-4xl"
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-gray-100 flex flex-col">
+      {/* New Navbar/Header : */}
+      <div className="flex items-center justify-between p-6">
+        <Link href="/" className="flex items-center gap-2">
+          <Shield className="h-6 w-6 text-gray-100" />
+
+          <span className="text-2xl font-bold">Anonyfy</span>
+        </Link>
+      </div>
+
+      {/* Separator */}
+      <Separator className="bg-gray-800 px-0" />
+
+      {/* Main Heading */}
+      <h1 className="text-2xl md:text-3xl font-extrabold my-12 text-center text-gray-300">
         <span className="underline">{username.toLocaleUpperCase()}'s</span>{" "}
         Public Profile
       </h1>
 
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="w-full space-y-4"
-        >
-          <FormField
-            control={form.control}
-            name="content"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="font-bold">
-                  Send Anonymous Message to @{username}
-                </FormLabel>
-
-                <FormControl>
-                  <Textarea
-                    placeholder="Write your anonymous message here"
-                    className="resize-none"
-                    {...field}
-                  />
-                </FormControl>
-
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <div className="flex justify-start">
-            {isLoading ? (
-              <Button disabled className="cursor-pointer">
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Please wait
-              </Button>
-            ) : (
-              <Button
-                type="submit"
-                disabled={isLoading || !messageContent}
-                className="cursor-pointer"
+      {/* Form component */}
+      <div className="flex-1 flex items-center justify-center">
+        <div className="w-full max-w-5xl">
+          <div className="bg-gradient-to-br from-gray-800 to-gray-900 p-8 rounded-xl border border-gray-700 shadow-xl mx-3 md:mx-auto">
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="w-full space-y-4"
               >
-                Send It
-              </Button>
-            )}
+                <FormField
+                  control={form.control}
+                  name="content"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="font-bold mb-2">
+                        Send Anonymous Message to @{username}
+                      </FormLabel>
+
+                      <FormControl>
+                        <Textarea
+                          placeholder="Write your anonymous message here"
+                          className="resize-none placeholder:text-gray-400"
+                          {...field}
+                        />
+                      </FormControl>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <div className="flex justify-start">
+                  {isLoading ? (
+                    <Button disabled className="cursor-pointer">
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Please wait
+                    </Button>
+                  ) : (
+                    <Button
+                      type="submit"
+                      disabled={isLoading || !messageContent}
+                      className="cursor-pointer"
+                      variant={"secondary"}
+                    >
+                      Send It
+                    </Button>
+                  )}
+                </div>
+              </form>
+            </Form>
           </div>
-        </form>
-      </Form>
-
-      {/* Button to suggest/generate new messages */}
-      <div className="my-8 space-y-4">
-        <div className="space-y-2">
-          <Button
-            variant={"default"}
-            className="my-4 cursor-pointer"
-            onClick={fetchSuggestedMessages}
-          >
-            Suggest Messages
-          </Button>
-
-          <p className="font-semibold">
-            Click on any message below to select it!
-          </p>
         </div>
       </div>
 
-      {/* List of messages */}
-      <Card>
-        <CardHeader>
-          <h3 className="text-xl font-semibold">Messages</h3>
-        </CardHeader>
-
-        <CardContent className="flex flex-col space-y-4">
-          {suggestedQuestions.map((suggestedQuestion, index) => (
+      {/* Message suggestion block */}
+      <div className="w-full max-w-5xl flex-1 flex flex-col md:border md:border-gray-700 md:rounded-xl my-8 shadow-xl p-6 md:mx-auto">
+        {/* Button to suggest/generate new messages */}
+        <div className="space-y-4">
+          <div className="space-y-2">
             <Button
-              key={index}
-              variant="outline"
-              className="mb-2 font-semibold cursor-pointer"
-              onClick={() => handleMessageClick(suggestedQuestion.question)}
+              variant={"outline"}
+              className="my-4 cursor-pointer bg-black px-4 py-2"
+              onClick={fetchSuggestedMessages}
             >
-              {suggestedQuestion.question}
+              Suggest Messages
             </Button>
-          ))}
-        </CardContent>
-      </Card>
 
-      <Separator className="my-6" />
+            <p className="font-semibold mb-4">
+              Click on any message below to select it!
+            </p>
+          </div>
+        </div>
 
+        {/* List of messages */}
+        <Card className="bg-gradient-to-br from-gray-800 to-gray-900">
+          <CardHeader>
+            <h3 className="text-xl font-semibold text-gray-300">Messages</h3>
+          </CardHeader>
+
+          <CardContent className="flex flex-col space-y-4">
+            {suggestedQuestions.map((suggestedQuestion, index) => (
+              <Button
+                key={index}
+                variant="outline"
+                className="mb-2 font-medium bg-gradient-to-br from-gray-800 to-gray-900 text-gray-200 cursor-pointer hover:text-gray-200"
+                onClick={() => handleMessageClick(suggestedQuestion.question)}
+              >
+                <p className="overflow-auto">{suggestedQuestion.question}</p>
+              </Button>
+            ))}
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Bottom CTA */}
       <div className="text-center">
-        <div className="mb-4">Get Your Message Board</div>
+        <div className="mb-2">Get Your Message Board</div>
         <Link href={"/sign-up"}>
-          <Button className="cursor-pointer">Create Your Account</Button>
+          <Button className="cursor-pointer mb-6" variant={"secondary"}>
+            Create Your Account
+          </Button>
         </Link>
       </div>
+
+      {/* Footer : */}
+      <footer className="py-6 text-center text-gray-500 text-md">
+        <p>© {new Date().getFullYear()} Anonyfy. All rights reserved.</p>
+      </footer>
     </div>
   );
 }
