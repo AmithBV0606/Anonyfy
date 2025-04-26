@@ -176,7 +176,7 @@ export default function page() {
             <Button
               onClick={copyToClipboard}
               variant={"outline"}
-              className="text-black"
+              className="text-black cursor-pointer"
             >
               Copy
             </Button>
@@ -197,11 +197,12 @@ export default function page() {
             Accept Messages: {acceptMessages ? "On" : "Off"}
           </span>
         </div>
-        <Separator />
+
+        <Separator className="bg-gray-600" />
 
         {/* Refresh button : */}
         <Button
-          className="mt-4"
+          className="mt-4 cursor-pointer"
           variant="outline"
           onClick={(e) => {
             e.preventDefault();

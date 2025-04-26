@@ -60,7 +60,7 @@ export default function Navbar() {
             <>
               <Button
                 variant={"outline"}
-                className="w-full md:w-auto text-black"
+                className="w-full md:w-auto text-black cursor-pointer"
                 onClick={() => signOut({ callbackUrl: "/" })}
               >
                 Logout
@@ -70,14 +70,14 @@ export default function Navbar() {
             <>
               <Link
                 href="/sign-in"
-                className="text-gray-300 hover:text-white transition-colors"
+                className="text-gray-300 hover:text-white transition-colors cursor-pointer"
               >
                 Login
               </Link>
 
               <Link href={"/sign-up"}>
                 <Button
-                  className="w-full md:w-auto bg-slate-100 text-black"
+                  className="w-full md:w-auto bg-slate-100 text-black cursor-pointer"
                   variant={"outline"}
                 >
                   Sign Up
