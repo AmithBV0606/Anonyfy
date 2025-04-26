@@ -41,15 +41,15 @@ export default function HeroSection() {
         </div>
 
         {/* Grid 2 : Image */}
-        <div className="relative h-[400px] lg:h-[500px] rounded-xl overflow-hidden border border-gray-800 shadow-2xl">
+        <div className="relative h-[400px] lg:h-[500px] rounded-xl overflow-hidden border border-gray-500 shadow-2xl">
           {/* A thin transparent screen on top of Image */}
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-800/50 via-gray-900/50 to-black/50 z-10"></div>
+          {/* <div className="absolute inset-0 bg-gradient-to-br from-gray-800/50 via-gray-900/50 to-black/50 z-10"></div> */}
 
           <Image
-            src="/placeholder.svg?height=500&width=500"
+            src="/Dashboard-Pic.png"
             alt="Anonyfy Platform Preview"
             fill
-            className="object-cover"
+            className="object-fill"
           />
 
           {/* A thin transparent screen at the bottom of Image */}
