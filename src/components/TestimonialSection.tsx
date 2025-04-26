@@ -37,9 +37,9 @@ export default function TestimonialSection() {
 
           {/* About */}
           <p className="text-gray-300">
-            "Anonyfy has completely changed how I interact with my audience. I'm
-            getting questions I never would have received otherwise, and it's
-            helped me create content that truly resonates."
+          &quot;Anonyfy has completely changed how I interact with my audience. I&apos;m
+            getting questions I never would have received otherwise, and it&apos;s
+            helped me create content that truly resonates.&quot;
           </p>
         </div>
 
@@ -63,9 +63,9 @@ export default function TestimonialSection() {
 
           {/* About */}
           <p className="text-gray-300">
-            "The anonymous feedback I get through Anonyfy has been invaluable
+            &quot;The anonymous feedback I get through Anonyfy has been invaluable
             for improving my reviews. My audience feels comfortable pointing out
-            things I might have missed."
+            things I might have missed.&quot;
           </p>
         </div>
 
@@ -89,9 +89,9 @@ export default function TestimonialSection() {
 
           {/* About */}
           <p className="text-gray-300">
-            "My followers ask me questions about their fitness journeys that
-            they wouldn't feel comfortable asking publicly. Anonyfy has helped
-            me build a more supportive community."
+            &quot;My followers ask me questions about their fitness journeys that
+            they wouldn&apos;t feel comfortable asking publicly. Anonyfy has helped
+            me build a more supportive community.&quot;
           </p>
         </div>
       </div>

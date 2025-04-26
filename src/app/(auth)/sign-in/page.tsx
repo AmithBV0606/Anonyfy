@@ -22,7 +22,7 @@ import { Loader2, Shield } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
 
-function page() {
+function Page() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const router = useRouter();
@@ -181,4 +181,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

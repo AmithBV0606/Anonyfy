@@ -15,7 +15,7 @@ import { verifySchema } from "@/schemas/verifySchema";
 import { ApiResponse } from "@/types/ApiResponse";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios, { AxiosError } from "axios";
-import { Shield } from "lucide-react";
+import { Loader2, Shield } from "lucide-react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
@@ -23,7 +23,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
 
-export default function page() {
+export default function Page() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { username } = useParams<{ username: string }>();
@@ -56,7 +56,7 @@ export default function page() {
       console.error("Error in verifying the code", error);
       const axiosError = error as AxiosError<ApiResponse>;
       setIsSubmitting(false);
-      let errorMessage = axiosError.response?.data.message;
+      const errorMessage = axiosError.response?.data.message;
       toast(errorMessage);
     }
   };
@@ -116,7 +116,14 @@ export default function page() {
                   className="w-full mt-2 cursor-pointer py-4"
                   variant={"secondary"}
                 >
-                  Verify
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Please wait
+                    </>
+                  ) : (
+                    "Verify"
+                  )}
                 </Button>
               </form>
             </Form>

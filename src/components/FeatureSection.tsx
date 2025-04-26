@@ -109,7 +109,7 @@ export default function FeatureSection() {
             After receiving enough messages, you can{" "}
             <span className="underline decoration-pink-400">toggle</span> the{" "}
             <span className="underline decoration-sky-500">
-              "Accepting Message"
+            &quot;Accepting Message&quot;
             </span>{" "}
             button, to stop receiving messages from your audience.
           </p>

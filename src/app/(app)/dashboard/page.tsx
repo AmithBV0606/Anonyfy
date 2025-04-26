@@ -15,7 +15,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-export default function page() {
+export default function Page() {
   // For storing all the messages users received
   const [messages, setMessages] = useState<Message[]>([]);
 
@@ -221,7 +221,7 @@ export default function page() {
       <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-gray-900 text-white rounded-2xl lg:w-full lg:max-w-6xl border border-gray-700">
         <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
           {messages.length > 0 ? (
-            messages.map((message, index) => (
+            messages.map((message) => (
               <MessageCard
                 key={JSON.stringify(message._id)}
                 message={message}

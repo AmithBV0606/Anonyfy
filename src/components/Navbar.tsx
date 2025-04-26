@@ -3,18 +3,18 @@
 import React from "react";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
-import { User } from "next-auth";
+// import { User } from "next-auth";
 import { Button } from "./ui/button";
 import { Shield } from "lucide-react";
 import { Separator } from "./ui/separator";
 
 export default function Navbar() {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
   // console.log(session);
   // console.log(status);
 
-  const user: User = session?.user as User;
+  // const user: User = session?.user as User;
 
   return (
     <>

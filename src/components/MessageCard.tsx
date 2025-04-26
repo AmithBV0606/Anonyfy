@@ -35,7 +35,7 @@ export default function MessageCard({
         `/api/delete-message/${message._id}`
       );
       toast(response.data.message);
-      // @ts-ignore
+      // @ts-expect-error I don't know why this error exists
       onMessageDelete(message._id);
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>;

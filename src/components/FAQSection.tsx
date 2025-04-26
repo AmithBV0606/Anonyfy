@@ -44,7 +44,7 @@ export default function FAQSection() {
               Currently this feature is{" "}
               <span className="underline decoration-sky-500">unavailable</span>.
               We will be building robust moderation tools to filter out
-              inappropriate content. In future, You'll have full control over
+              inappropriate content. In future, You&apos;ll have full control over
               which messages you choose to view and respond to.
             </p>
           </div>
@@ -71,7 +71,7 @@ export default function FAQSection() {
             </h3>
 
             <p className="text-gray-400">
-              Once you create your account, you'll see a{" "}
+              Once you create your account, you&apos;ll see a{" "}
               <span className="underline decoration-sky-500">unique link</span>{" "}
               on your dashboard that you can share on your social media
               profiles, video descriptions, or anywhere your audience can find

@@ -26,7 +26,7 @@ import { QuestionProps } from "@/types/Questions";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 
-function page() {
+function Page() {
   const { username } = useParams<{ username: string }>();
 
   // Loading state for submitting the message
@@ -97,7 +97,7 @@ function page() {
 
   // Function to fetch the suggested messages
   const fetchSuggestedMessages = async () => {
-    let newFilteredQuestion: QuestionProps[] = [];
+    const newFilteredQuestion: QuestionProps[] = [];
 
     for (let index = 0; index < 3; index++) {
       const randomNum = Math.floor(Math.random() * 30);
@@ -132,7 +132,7 @@ function page() {
 
       {/* Main Heading */}
       <h1 className="text-2xl md:text-3xl font-extrabold my-12 text-center text-gray-300">
-        <span className="underline">{username.toLocaleUpperCase()}'s</span>{" "}
+        <span className="underline">{username.toLocaleUpperCase()}&apos;s</span>{" "}
         Public Profile
       </h1>
 
@@ -248,4 +248,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

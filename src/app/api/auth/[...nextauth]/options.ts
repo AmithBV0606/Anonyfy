@@ -18,6 +18,9 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials: any): Promise<any> {
+        if (!credentials) {
+          return null;
+        }
         // Connect to the database
         await dbConnect();
 
@@ -53,8 +56,11 @@ export const authOptions: NextAuthOptions = {
           } else {
             throw new Error("Incorrect Password!");
           }
-        } catch (err: any) {
-          throw new Error(err);
+        } catch (err) {
+          if (err instanceof Error) {
+            throw new Error(err.message);
+          }
+          throw new Error("Something went wrong during authorization");
         }
       },
     }),

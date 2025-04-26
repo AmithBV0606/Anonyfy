@@ -51,7 +51,7 @@ export async function POST(request: Request) {
       { status: 200 }
     );
   } catch (error) {
-    console.log("Failed to update user status to accept messages!");
+    console.log("Failed to update user status to accept messages!", error);
     return Response.json(
       {
         success: false,
@@ -63,7 +63,7 @@ export async function POST(request: Request) {
 }
 
 // This GET request will be called when we need to get the message acceptance status.
-export async function GET(request: Request) {
+export async function GET() {
   await dbConnect();
 
   // To get currently logged in users.

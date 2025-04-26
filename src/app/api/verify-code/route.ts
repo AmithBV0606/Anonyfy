@@ -1,10 +1,5 @@
-import { NextRequest } from "next/server";
 import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/model/User";
-
-// Zod for validation
-import { z } from "zod";
-import { usernameValidation } from "@/schemas/signUpSchema";
 
 export async function POST(request: Request) {
   await dbConnect();

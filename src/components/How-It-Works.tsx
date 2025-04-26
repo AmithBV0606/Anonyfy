@@ -32,8 +32,8 @@ export default function HowItWorks() {
             <p className="text-gray-400">
               {/* Sign up for Anonyfy and set up your profile with your name, bio,
               and profile picture. */}
-              Sign up for Anonyfy and you'll receive an email with 6-digit OTP.
-              Verify your account by entering the OTP and then you'll be
+              Sign up for Anonyfy and you&apos;ll receive an email with 6-digit OTP.
+              Verify your account by entering the OTP and then you&apos;ll be
               redirected to Login/Sign Up page.
             </p>
           </div>
