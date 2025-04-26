@@ -44,14 +44,14 @@ export default function MessageCard({
   };
 
   return (
-    <Card>
+    <Card className="bg-gradient-to-br from-gray-800 to-gray-600 p-8 rounded-xl border border-gray-700 text-gray-200">
       <CardHeader>
         <div className="flex justify-between items-center">
           <CardTitle>{message.content}</CardTitle>
 
           <AlertDialog>
             <AlertDialogTrigger asChild>
-              <Button variant="destructive">
+              <Button variant="destructive" className="ml-12 cursor-pointer">
                 <X className="w-5 h-5" />
               </Button>
             </AlertDialogTrigger>
