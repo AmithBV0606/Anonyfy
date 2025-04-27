@@ -1,41 +1,137 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Welcome to Anonyfy!
 
-## Getting Started
+<div align="center"> <img src="public/Home-Page.png" alt="Anonyfy Logo"/> 
+    <h3>
+        Receive messages without revealing your identity
+    <h3>
+</div>
+    
+##
 
-First, run the development server:
+## 📄 About the Project
+
+- <ins><b>Anonyfy</b></ins> is a full-stack web application that allows users to receive anonymous feedback through unique profile links. 
+
+- Users can easily create an account, share their profile, and start receiving messages from anyone without revealing their identity. 
+
+- With a focus on privacy, user experience, and simplicity, Anonyfy provides an intuitive platform for gathering honest opinions, compliments, or constructive criticism. 
+
+- Built using modern technologies like Next.js, Prisma, and TailwindCSS, Anonyfy ensures a smooth, fast, and secure experience.
+
+## ✨ Features
+
+**Anonymous Messaging** : Anyone can send you messages without creating an account.
+
+**Unique User Links** : Each user gets a unique link they can share to receive feedback.
+
+**Authentication** : Secure login/signup system with NextAuth.js (Email or OAuth if configured).
+
+**Dashboard** : Users can view received messages in a private dashboard.
+
+**Message Management** : Ability to delete unwanted messages from the dashboard.
+
+**Responsive UI** : Mobile-first, beautifully designed with TailwindCSS.
+
+## 🛠 Tech Stack
+
+- **Next.js** : Full-Stack React Framework
+- **React.js** : Frontend
+- **TypeScript** : Type-Safety
+- **TailwindCSS** : Styling
+- **Shadcn-UI** : UI Library
+- **react-email** : For email templates
+- **Resend** : For sending out the actual email.
+- **MongoDB** : Database
+- **Mongoose** : ODM for MongoDB
+- **NextAuth.js** : Authentication
+- **Zod** : Data Validation
+
+## 🧑‍💻 Local Development Setup
+
+Follow these steps to set up Anonyfy locally:
+
+**1. Clone the repository** :
 
 ```bash
+git clone https://github.com/your-username/anonyfy.git
+cd anonyfy
+```
+
+##
+
+**2. Install dependencies** :
+
+```bash
+pnpm install
+# or
+npm install
+# or
+yarn install
+```
+
+##
+
+**3. Copy the variables from `.env.sample` to `.env`** :
+
+```bash
+cp .env.sample .env
+```
+
+##
+
+**4. Set up environment variables** :
+
+```
+MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.fgdlagf.mongodb.net/Anonyfy?retryWrites=true&w=majority&appName=Cluster0
+
+RESEND_API_KEY="Enter resend Api Key obtained from https://resend.com/"
+
+NEXTAUTH_SECRET="Enter anything you want. Any kind of password is fine."
+```
+
+**NOTE** :
+
+1. Refer `MONGO-DB.md` for obtaining the connection string from [MongoDB](https://cloud.mongodb.com). Then replace the username and password of the above given connection string with the actual username and paasword received from the MongoDB.
+
+2. For getting the Resend API key, watch the following YouTube video : From (4:17)
+https://youtu.be/fEeksraKfJI?si=S_t-ADL2rTYLa0iK
+
+3. For the "NEXTAUTH_SECRET", you can give any secret. 
+
+For Example : NEXTAUTH_SECRET=your_name_101
+
+##
+
+**5. Start the development server** :
+
+```bash
+pnpm dev
+# or
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<b>NOTE</b> : Visit http://localhost:3000 🚀
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📜 License
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+[MIT License](LICENSE)
 
-## Learn More
+## 🛠 Contribution Guide
 
-To learn more about Next.js, take a look at the following resources:
+We welcome contributions! To contribute:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Fork the project.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. Create a feature branch (git checkout -b feature/your-feature)
 
-## Deploy on Vercel
+3. Commit your changes (git commit -m 'Add your feature')
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. Push to your fork (git push origin feature/your-feature)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+5. Open a Pull Request
 
-#### Folder Structure 
+**NOTE** : Please make sure your code follows the existing style and passes all linting checks.
 
-model --> For writing schemas through Mongoose which later interacts with MongoDB.
-schemas --> Schemas written here are for ZOD validations
+## ❤️ Built with love by Amith B V
