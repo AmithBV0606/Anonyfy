@@ -91,7 +91,7 @@ NEXTAUTH_SECRET="Enter anything you want. Any kind of password is fine."
 
 **NOTE** :
 
-1. Refer `MONGO-DB.md` for obtaining the connection string from [MongoDB](https://cloud.mongodb.com). Then replace the username and password of the above given connection string with the actual username and paasword received from the MongoDB.
+1. Refer [this](MONGO-DB.md) for obtaining the connection string from [MongoDB](https://cloud.mongodb.com). Then replace the username and password of the above given connection string with the actual username and paasword received from the MongoDB.
 
 2. For getting the Resend API key, watch the following YouTube video : From (4:17)
 https://youtu.be/fEeksraKfJI?si=S_t-ADL2rTYLa0iK
